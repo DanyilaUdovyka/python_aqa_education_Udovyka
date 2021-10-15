@@ -1,4 +1,4 @@
 numpy
 pytest
 pytest-cov
-pylint:2.9.6
+pylint==2.9.6
