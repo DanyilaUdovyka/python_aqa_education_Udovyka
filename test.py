@@ -1,1 +1,1 @@
-print("Python g")
+print("Python Education")
