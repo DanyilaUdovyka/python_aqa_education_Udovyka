@@ -1,0 +1,4 @@
+numpy
+pytest
+pytest-cov
+pylint==2.9.6
