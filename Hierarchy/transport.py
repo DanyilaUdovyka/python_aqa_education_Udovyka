@@ -27,6 +27,19 @@ class Transport:
     def increment_odometer(self, km):
         self.odometer_reading += km
 
+    def __str__(self):
+        print("Car blocked")
+
+    def __repr__(self):
+        print("Car missing")
+
+    def __add__(self, other):
+        if isinstance(other, (int, float)):
+            return self.model + other
+        raise NotImplemented
+
+    def __radd__(self, other):
+        return self + other
 
 class ElectricCar(Transport):
 
@@ -42,6 +55,13 @@ class ElectricCar(Transport):
         desc = str(self.year) + ' ' + self.model + ' ' + str(self.battery)
         return desc.title()
 
+    def __add__(self, other):
+        if isinstance(other, (int, float)):
+            return self.year + other
+        raise NotImplemented
+
+    def __radd__(self, other):
+        return self + other
 
 class DieselCar(Transport):
 
@@ -56,6 +76,7 @@ class DieselCar(Transport):
 
 
 class StationWagon(Transport):
+
     def __init__(self, maker, model, year, speed):
         super().__init__(maker, model, year, speed)
 
@@ -74,11 +95,19 @@ class StationWagon(Transport):
         elif ent == "big":
             print("Car has ", big_car, " doors")
 
+    def __str__(self):
+        print("StationWagon blocked")
+
+    def __repr__(self):
+        print("StationWagon missing")
+
 
 class Carriage(Transport):
+
     def __init__(self, maker, model, year, speed):
         super().__init__(maker, model, year, speed)
 
+    @property
     def description_name(self):
         """overriding parent method"""
         desc = str(self.year) + ' ' + self.model
@@ -111,14 +140,13 @@ class Pickup(DieselCar, ElectricCar, Carriage, StationWagon):
         elif lif == "big":
             print("Car's power is : ", m_power)
 
+    def __copy__(self):
+        return self.tank
+
 # car = ElectricCar("tesla", "S", 2019, 250)
 # print(car.description_name())
 # car.description_battery()
-
-
 # pickup = Pickup("GT", "12wEE", 2005, 350)
 # print(pickup.description_name())
 # pickup.lifting_capacity()
 # pickup.doors()
-
-
